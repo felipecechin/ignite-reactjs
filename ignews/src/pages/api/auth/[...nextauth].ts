@@ -22,14 +22,18 @@ export default NextAuth({
     async signIn({ user, account, profile, email, credentials }) {
 
       const { email: userEmail } = user
-      await fauna.query(
-        q.Create(
-          q.Collection('users'),
-          { data: { email: userEmail } }
-        )
-      )
 
-      return true;
+      try {
+        await fauna.query(
+          q.Create(
+            q.Collection('users'),
+            { data: { email: userEmail } }
+          )
+        )
+        return true;
+      } catch {
+        return false;
+      }
     }
   }
 })
