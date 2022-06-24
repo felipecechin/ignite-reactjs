@@ -27,7 +27,6 @@ export function Pagination({ totalCountOfRegisters, currentPage, onPageChange, r
     ? generatePagesArray(currentPage, Math.min(currentPage + siblingsCount, lastPage))
     : []
 
-  console.log(nextPages)
 
   return (
     <Stack
