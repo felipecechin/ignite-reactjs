@@ -1,15 +1,17 @@
-import { Box, Button, Divider, Flex, Heading, HStack, SimpleGrid, VStack } from "@chakra-ui/react";
-import Link from "next/link";
-import { Input } from "../../components/Form/Input";
-import { SubmitHandler, useForm } from 'react-hook-form'
 import * as yup from 'yup'
-import { yupResolver } from '@hookform/resolvers/yup'
+
+import { Box, Button, Divider, Flex, HStack, Heading, SimpleGrid, VStack } from "@chakra-ui/react";
+import { FieldError, SubmitHandler, useForm } from 'react-hook-form'
+
 import { Header } from "../../components/Header";
+import { Input } from "../../components/Form/Input";
+import Link from "next/link";
 import { Sidebar } from "../../components/Sidebar";
-import { useMutation } from "react-query";
 import { api } from "../../services/api";
 import { queryClient } from "../../services/queryClient";
+import { useMutation } from "react-query";
 import { useRouter } from "next/router";
+import { yupResolver } from '@hookform/resolvers/yup'
 
 type CreateUserFormData = {
   name: string;
@@ -83,13 +85,13 @@ export default function CreateUser() {
               <Input
                 label="Nome completo"
                 {...register('name')}
-                error={errors.name}
+                error={errors.name as FieldError}
               />
               <Input
                 type="email"
                 label="E-mail"
                 {...register('email')}
-                error={errors.email}
+                error={errors.email as FieldError}
               />
             </SimpleGrid>
 
@@ -98,13 +100,13 @@ export default function CreateUser() {
                 type="password"
                 label="Senha"
                 {...register('password')}
-                error={errors.password}
+                error={errors.password as FieldError}
               />
               <Input
                 type="password"
                 label="Confirmação da senha"
                 {...register('password_confirmation')}
-                error={errors.password_confirmation}
+                error={errors.password_confirmation as FieldError}
               />
             </SimpleGrid>
           </VStack>

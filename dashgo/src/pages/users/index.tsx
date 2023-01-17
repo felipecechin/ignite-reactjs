@@ -1,17 +1,20 @@
 import { Box, Button, Checkbox, Flex, Heading, Icon, Link, Spinner, Table, Tbody, Td, Text, Th, Thead, Tr, useBreakpointValue } from "@chakra-ui/react";
+import { getUsers, useUsers } from "../../services/hooks/useUsers";
+
 import { GetServerSideProps } from "next";
-import NextLink from "next/link";
-import { useState } from "react";
-import { RiAddLine } from "react-icons/ri";
 import { Header } from "../../components/Header";
+import NextLink from "next/link";
 import { Pagination } from "../../components/Pagination";
+import { RiAddLine } from "react-icons/ri";
 import { Sidebar } from "../../components/Sidebar";
 import { api } from "../../services/api";
-import { getUsers, useUsers } from "../../services/hooks/useUsers";
 import { queryClient } from "../../services/queryClient";
+import { useQuery } from "react-query";
+import { useState } from "react";
 
 export default function UserList({ users, totalCount }) {
   const [page, setPage] = useState(1)
+  
   const { data, isLoading, error, isFetching } = useUsers(page, {
     // initialData: {
     //   users,
